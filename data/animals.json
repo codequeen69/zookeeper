@@ -117,6 +117,24 @@
         "hungry"
       ],
       "id": "11"
+    },
+    {
+      "name": "dog",
+      "species": "dachshund",
+      "diet": "omnivore",
+      "personalityTraits": [
+        "goofy"
+      ],
+      "id": "12"
+    },
+    {
+      "name": "Larry",
+      "species": "lemur",
+      "diet": "omnivore",
+      "personalityTraits": [
+        "hungry"
+      ],
+      "id": "13"
     }
   ]
 }

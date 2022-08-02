@@ -11,6 +11,8 @@ app.use(express.urlencoded({ extended: true }));
 // parse incoming JSON data
 app.use(express.json());
 
+app.use(express.static('public'));
+
 
 function filterByQuery(query, animalsArray){
     let personalityTraitsArray = [];
@@ -120,6 +122,24 @@ app.post('/api/animals', (req, res) =>{
     const animal = createNewAnimal(req.body, animals);
     res.json(animal);
   }
+});
+// the / indicated the root route of the server
+app.get('/', (req, res) => {
+  //we are displaying an HTML page in browswer so we use send instead of json path is finding the correnct locateion for html code
+  res.sendFile(path.join(__dirname, './public/index.html'));
+});
+//routes with api deal with transference of JSON data, those without api endpoint serve and HTML page like here
+app.get('/animals', (req, res) =>{
+  res.sendFile(path.join(__dirname, './public/animals.html'));
+});
+
+app.get('/zookeepers', (req, res) => {
+  res.sendFile(path.join(__dirname, './public/zookeepers.html'))
+});
+
+//* acts as a wildcard. Any route not previously defined will receive the homepage as the response. this route should always come last!!!!!
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, './public/index.html'));
 });
 
 //makes the server listen

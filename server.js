@@ -6,13 +6,11 @@ const {animals} = require('./data/animals.json')
 const PORT = process.env.PORT || 3001;
 const app = express();
 
+app.use(express.static('public'));
 // parse incoming string or array data
 app.use(express.urlencoded({ extended: true }));
 // parse incoming JSON data
 app.use(express.json());
-
-app.use(express.static('public'));
-
 
 function filterByQuery(query, animalsArray){
     let personalityTraitsArray = [];
@@ -58,7 +56,7 @@ function filterByQuery(query, animalsArray){
 function findById(id, animalsArray){
 const result = animalsArray.filter(animal => animal.id === id)[0];
 return result;
-};
+}
 
 function createNewAnimal(body, animalsArray){
     const animal = body;
@@ -72,7 +70,7 @@ function createNewAnimal(body, animalsArray){
       );
     
     //return finished code to post route for response
-    return body;
+    return animal;
 };
 
 function validateAnimal(animal) {
@@ -145,4 +143,4 @@ app.get('*', (req, res) => {
 //makes the server listen
 app.listen(PORT, () => {
     console.log(`API server now on port ${PORT}!`);
-})
+});
